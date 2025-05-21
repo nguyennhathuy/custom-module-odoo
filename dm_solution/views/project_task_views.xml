@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="view_task_form2_inherit_todo_project_task" model="ir.ui.view">
+        <field name="name">project.todo.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_todo.project_task_view_todo_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="after">
+                <field name="manager_ids" widget="many2many_avatar_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <menuitem id="menu_powerbi_root"
+            name="Power BI Reports"
+            sequence="90"
+            web_icon="powerbi_links,static/description/icon.png"/>
+  <menuitem id="menu_powerbi_link_list_actual"
+            name="All Links"  
+            parent="menu_powerbi_root"
+            action="action_powerbi_link_list"
+            sequence="10"/>
+</odoo>

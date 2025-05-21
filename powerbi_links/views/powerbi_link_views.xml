@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_powerbi_link_tree" model="ir.ui.view">
+        <field name="name">powerbi.link.list</field>
+        <field name="model">powerbi.link</field>
+        <field name="arch" type="xml">
+            <list string="Power BI Links" > 
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="powerbi_url" widget="url"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_powerbi_link_form" model="ir.ui.view">
+        <field name="name">powerbi.link.form</field>
+        <field name="model">powerbi.link</field>
+        <field name="arch" type="xml">
+            <form string="Power BI Link">
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name"/>
+                            <field name="powerbi_url" widget="url" placeholder="e.g., https://app.powerbi.com/view?..."/>
+                        </group>
+                        <group name="group_right">
+                            <field name="active"/>
+                            <field name="sequence"/>
+                            <field name="type_dashboard" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="page_description">
+                            <field name="description" placeholder="Enter a detailed description here..."/>
+                        </page>
+                        <page string="Power BI Preview" name="page_powerbi_preview">
+                            <div style="width:100%; height:70vh; border: 1px solid #ccc;">
+                                <iframe 
+                                    src="about:blank"
+                                    width="100%" height="100%" frameborder="0"
+                                    data-embed-url="1"
+                                    allowfullscreen="true"
+                                    title="Power BI Report Preview"
+                                >
+                                    Your browser does not support iframes, or the Power BI link is invalid.
+                                    Please ensure the URL is correct and allows embedding.
+                                </iframe>
+                            </div>
+                            <p class="mt-2">
+                                <strong>Note:</strong> Embedding may be restricted by Power BI's Content Security Policy (CSP)
+                                or sharing settings. If the preview is blank, try opening the URL directly.
+                            </p>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_powerbi_link_list" model="ir.actions.act_window">
+        <field name="name">Power BI Links</field>
+        <field name="res_model">powerbi.link</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_powerbi_link_search" model="ir.ui.view">
+        <field name="name">powerbi.link.search</field>
+        <field name="model">powerbi.link</field>
+        <field name="arch" type="xml">
+            <search string="Search Power BI Links">
+                <field name="name" string="Report Name" filter_domain="['|', ('name','ilike',self),('description','ilike',self)]"/>
+                <field name="description" string="Description"/>
+                <separator/>
+                <filter string="Active" name="active" domain=""/>
+                <filter string="Inactive" name="inactive" domain="[('active','=',False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_active" context="{'group_by':'active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
+<!-- access_powerbi_link_user,powerbi.link.user,model_powerbi_link,base.group_user,1,1,1,1 -->
+<!-- access_powerbi_link_public_readonly,powerbi.link.public.readonly,model_powerbi_link,,1,0,0,0 -->
+<!-- chấm công online -->
